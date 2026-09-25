@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jury Dashboard | Beyond The Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css" />
+<style>
+  .jury-app { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  .section { background: var(--bg-card); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--border); }
+  .grid-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .stat-card { background: var(--bg-subtle); padding: 1rem; border-radius: 6px; text-align: center; }
+  .stat-card .value { font-size: 2rem; font-family: var(--font-display); color: var(--accent); }
+  .stat-card .label { font-size: 0.9rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-dim); font-size: 0.9rem; font-weight: 500; }
+  .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-right: 0.5rem; }
+  .badge.disagreement { background: #fce8e8; color: #d32f2f; }
+  .badge.similarity { background: #e8f4fc; color: #0277bd; }
+  .export-btn { background: var(--accent); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; float: right; font-weight: 500; }
+  .export-btn:hover { opacity: 0.9; }
+  .clickable-row { cursor: pointer; }
+  .clickable-row:hover { background: var(--bg-subtle); }
+  .expanded-row { display: none; background: var(--bg-subtle); }
+  .expanded-row.active { display: table-row; }
+  .expanded-content { padding: 1.5rem; }
+  .judge-column { display: inline-block; width: 30%; vertical-align: top; margin-right: 2%; background: var(--bg-card); padding: 1rem; border-radius: 4px; }
+  h2 { font-family: var(--font-display); margin-top: 0; }
+</style>
+</head>
+<body>
+<div class="jury-app">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1>Jury Dashboard</h1>
+    <div>
+      <button class="export-btn" id="exportBtn">Export JSON</button>
+      <a href="/" style="margin-right: 1rem; color: var(--text-dim); text-decoration: none;">&larr; Back to Single Judge</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Batch Progress</h2>
+    <div class="grid-stats" id="progressStats">
+      <div class="stat-card"><div class="value">-</div><div class="label">Ingested</div></div>
+      <div class="stat-card"><div class="value">-</div><div class="label">Scored</div></div>
+      <div class="stat-card"><div class="value">-</div><div class="label">Unscored</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Leaderboard & Disagreement</h2>
+    <table id="leaderboardTable">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Team / Project</th>
+          <th>Calibrated Score</th>
+          <th>Raw Score</th>
+          <th>Judges</th>
+          <th>Flags</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated via JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Similarity Flags</h2>
+    <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1rem;">
+      NOTE: Semantic similarity is a signal to investigate, NOT proof of plagiarism. Similar ideas and boilerplate code are common in hackathons.
+    </p>
+    <div id="similarityPanel">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>Reliability Spot-Check</h2>
+    <div id="reliabilityPanel">
+      <p style="color: var(--text-dim);">No reliability check run for this batch yet.</p>
+    </div>
+  </div>
+</div>
+<script src="/static/jury.js"></script>
+</body>
+</html>

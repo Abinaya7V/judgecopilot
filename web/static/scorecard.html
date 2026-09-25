@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Participant Scorecard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css" />
+<style>
+  .scorecard-app {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 24px;
+  }
+  .lookup-form {
+    background: var(--panel);
+    padding: 32px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .lookup-form input {
+    font-family: var(--mono);
+    font-size: 18px;
+    padding: 12px 16px;
+    width: 240px;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .lookup-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .lookup-form button {
+    display: block;
+    margin: 0 auto;
+    background: var(--accent);
+    color: #F4F5F1;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .lookup-form button:hover {
+    background: var(--accent-strong);
+  }
+</style>
+</head>
+<body>
+
+<div class="scorecard-app">
+  <div class="brand" style="justify-content: center; margin-bottom: 40px;">
+    <svg class="brand-mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+      <circle cx="16" cy="16" r="13" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0.55"/>
+      <circle cx="16" cy="16" r="8" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0.8"/>
+      <path d="M9 21 L23 7 M23 7 L16 7 M23 7 L23 14" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h1>Beyond The Pitch</h1>
+  </div>
+  
+  <div id="lookupPanel" class="lookup-form">
+    <h2 style="font-family: var(--serif); margin-top: 0; color: var(--ink);">View your scorecard</h2>
+    <p style="color: var(--ink-soft); margin-bottom: 24px;">Enter the 6-character access code provided by organizers to see your results.</p>
+    <form id="codeForm">
+      <input type="text" id="accessCodeInput" placeholder="A1B2C3" required maxlength="6" />
+      <button type="submit" id="lookupBtn">View Result</button>
+    </form>
+    <div id="lookupError" style="color: var(--concern); margin-top: 16px; font-size: 14px; display: none;"></div>
+  </div>
+
+  <div id="resultPanel" style="display: none;"></div>
+</div>
+
+<script src="/static/scorecard.js"></script>
+</body>
+</html>
